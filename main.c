@@ -4,12 +4,13 @@
 
 int main()
 {
-    printf("Sistema de Conversao & Probabilidades Pre-Jogos - Ultima atualizacao: 07/06/2021 (Versao 1.2.1)\n");
+    printf("Sistema de Conversao & Probabilidades Pre-Jogos - Ultima atualizacao: 19/08/2021 (Versao 1.2.2)\n");
     printf("@github: Shaffer443 - Instagram: @rafaelgouveiashaffer\n\n");
 
     int opcao, entradas, green, red;
     float odds, porcentagem, resultado1, resultado2, resultado2_1, resultado3;
     float mediagols, total, media1, media2, media3;
+    float casa,favor,contra,kelly,kellyporc;
     int jogos, contador, gols, over1=2, over2=3, over3=4, cont1=0, cont2=0, cont3=0;
 
     do{
@@ -18,7 +19,8 @@ int main()
         puts("3. Transformar Porcentagem em Odds.");
         puts("4. Porcentagem de Acertabilidade de entradas Punter.");
         puts("5. Probabilidade de Over - Under.");
-        puts("6. Sair");
+        puts("6. Criterio de Kelly.");
+        puts("7. Sair");
         printf("Digite a opcao desejada: ");
         scanf("%d", &opcao);
 
@@ -76,19 +78,19 @@ int main()
 
             printf("\nDigite os dados dos %d jogos... \n", jogos);
 
-  for (contador = 1 ; contador <= jogos ; contador ++ ){
-    printf ("\nDigite os gols da partida: ");
-    scanf("%d", &gols);
-    total= total + gols;
+            for (contador = 1 ; contador <= jogos ; contador ++ ){
+                printf ("\nDigite os gols da partida: ");
+                    scanf("%d", &gols);
+                        total= total + gols;
 
-     if(gols >= over1){
-            cont1++;
-        }if(gols >= over2){
-            cont2++;
-            } if(gols >= over3){
-                cont3++;
+            if(gols >= over1){
+                cont1++;
+                    }if(gols >= over2){
+                        cont2++;
+                            } if(gols >= over3){
+                                cont3++;
+                }
             }
-  }
 
         media1 = (cont1*100)/jogos;
          media2 = (cont2*100)/jogos;
@@ -149,6 +151,66 @@ int main()
 
         case 6:
 
+        /*
+        Kelly = (BP – Q) / B
+
+        B = (Odd da Casa) – 1
+        P = Probabilidade de o resultado acontecer (de acordo com sua opinião)
+        Q = Probabilidade de o resultado não acontecer, ou seja 1 – P
+        */
+
+
+
+
+
+        puts("\n  Método Critério de Kelly Simples");
+        puts("-------------------------------------\n");
+
+        printf("Qual o valor da odds do time da casa? use ponto (.):  ");
+        scanf("%f",&casa);
+
+        favor = (1/casa);
+        contra = (1.00 - favor);
+
+        kelly = ((casa - 1) * (favor-contra))/(casa-1);
+        kellyporc = kelly*100;
+
+        printf("\n %.4f ou %.2f % \n", kelly, kellyporc);
+
+        if (kelly >= 0.05){
+
+        puts("\n* Tem +EV * \n");
+
+         } else{
+
+           puts("\n * Não vale a operação * \n");
+
+            };
+
+        break;
+
+    /*O resultado acima deu negativo, e você deve estar se perguntando se há algo de errado com o cálculo. Não, não há.
+
+      Isso ocorre porque segundo o Critério de Kelly não compensa apostar nesse resultado com essa odd de vitória para o Time casa ser negativo.
+
+      Por quê?
+
+      Porque a odds que a casa colocou na vitória do Time da Casa, significa que a casa acha que a probabilidade do time vencer não vale a opereção.
+
+      Se a casa dá uma chance de vitória Time da Casa maior do que a que a gente acha que é verdadeira, então não compensa apostar nesse resultado. Não é uma aposta de valor!
+
+      Mas vamos a um exemplo quando o critério é positivo, o Critério de Kelly nos diz que você deve apostar o valor que a % mencionar da sua banca na vitória.
+
+      Isso só é possível levando em consideração a odd da casa e a probabilidade real de o evento acontecer.
+
+      Aqui identificamos um pequeno problema do método: pode acontecer de o método sugerir apostar porcentagens muito altas da sua banca.
+
+      Cabe o discernimento do apostador em decidir se vale a pena fazer a aposta ou não. É costume no Critério de Kelly estabelecer um teto porcentual máximo.*/
+
+
+
+        case 7:
+
             printf("fechando Sistema...\n"); /* não está fechando e saindo*/
 
         default:
@@ -159,7 +221,7 @@ int main()
 
 
 
-    }while(opcao!=6);
+    }while(opcao!=7);
 
     return 0;
 }
