@@ -15,9 +15,9 @@ Além de analises pontuais e verificações simples, por média, por exemplo:
 - Probabilidade de Over - Under.
 
 Este sistema foi criado apra uso pessoal, como exercício em uma atividade de _lógica de programação_, onde aprendiamos em _linguamgem C_. 
-Decidi criar um sistema, que não rpecisa ser intalado, bastando baixar os arquivos do repositorio e clicar em _main.exe_, para que se abra em terminal cmd e possa ser utilizado.
+Decidi criar um sistema, que não rpecisa ser intalado, bastando baixar os arquivos do repositorio e clicar em _main.exe_, para que se abra em _terminal cmd_ e possa ser utilizado.
 
-*Imagem aqui
+[Imagem](https://github.com/Shaffer443/DadosEstatisticosFutebolPunter/blob/6c81dd24b04ca8e47ee901ff5f18ef69fb96dd5b/ProgramaAn%C3%A1lise%20DeOdds_Porcentagens_outros_executavel.png?raw=true)
 
 
 ## Explicando cada função do Switch Case (Opções):
