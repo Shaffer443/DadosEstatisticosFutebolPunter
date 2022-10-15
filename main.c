@@ -4,7 +4,8 @@
 
 int main()
 {
-    printf("Sistema de Conversao & Probabilidades Pre-Jogos - Ultima atualizacao: 19/08/2021 (Versao 1.2.2)\n");
+    printf("Sistema de Conversoes & Probabilidades Para Entradas Esportivas");
+    printf("Ultima atualizacao: 15/10/2022 (Versao 1.2.3)\n");
     printf("@github: Shaffer443 - Instagram: @rafaelgouveiashaffer\n\n");
 
     int opcao, entradas, green, red;
@@ -12,8 +13,10 @@ int main()
     float mediagols, total, media1, media2, media3;
     float casa,favor,contra,kelly,kellyporc;
     int jogos, contador, gols, over1=2, over2=3, over3=4, cont1=0, cont2=0, cont3=0;
+    float odds_atual, stake_max, ganhos_max, red_ajustes_max, transf_adds_atual, transf_ganhos_max, transf_red_ajustes_max, r,calc_1, calc_2, calc_x, stakeideal, valor_sugerido,valor_sugerido_stake;
 
     do{
+        printf("\n");
         puts("1. Validar uma Probabilidade.");
         puts("2. Transformar Odds em Porcentagem.");
         puts("3. Transformar Porcentagem em Odds.");
@@ -33,7 +36,7 @@ int main()
             resultado3 = (green*100)/entradas;
             red = entradas - green;
 
-                printf("\nCom suas %d Entradas(Operacoes), voce teve a %d acertos(green) e %d red(s), e teve %.2f de sucesso.\n", entradas, green, red, resultado3);
+                printf("\n>> Com suas %d Entradas(Operacoes), voce teve a %d acertos(green) e %d red(s), e teve %.2f de sucesso.\n", entradas, green, red, resultado3);
 
                 if ( resultado3 > 80){
                     printf("\nProbabilidade #Alta#\n\n");
@@ -47,14 +50,14 @@ int main()
             printf("\nDigite o valor da odds: ");
             scanf("%f", &odds);
             resultado1 = (1/odds)*100;
-                printf("Para a Odds %1.2f, voce tem a probabilidade de %2.2f % de acerto.\n\n", odds, resultado1);
+                printf(">> Para a Odds %1.2f, voce tem a probabilidade de %2.2f % de acerto.\n\n", odds, resultado1);
             break;
         case 3:
             printf("\nDigite o valor da Porcentagem:  ");
             scanf("%f", &porcentagem);
             resultado2 = (porcentagem/100);
             resultado2_1 = 1/resultado2;
-                printf("Para a Porcentagem de %2.2f, voce tem a Odds Justa de %1.2f .\n\n", porcentagem, resultado2_1);
+                printf(">> Para a Porcentagem de %2.2f, voce tem a Odds Justa de %1.2f .\n\n", porcentagem, resultado2_1);
             break;
 
         case 4:
@@ -66,7 +69,7 @@ int main()
             resultado3 = (green*100)/entradas;
             red = entradas - green;
 
-                printf("Com suas %d Entradas(Operacoes), voce teve a %d acertos(green) e %d red(s), e teve %.2f de sucesso.\n\n", entradas, green, red, resultado3);
+                printf(">> Com suas %d Entradas(Operacoes), voce teve a %d acertos(green) e %d red(s), e teve %.2f de sucesso.\n\n", entradas, green, red, resultado3);
             break;
 
         case 5:
@@ -96,7 +99,7 @@ int main()
          media2 = (cont2*100)/jogos;
           media3 = (cont3*100)/jogos;
 
-        printf("\nPartidas Over 1.5 tem porcentagem de %2.2f  de probabilidade de ocorrer, em %d partidas de um total de %d.\n", media1, cont1, jogos);
+        printf("\n>> Partidas Over 1.5 tem porcentagem de %2.2f  de probabilidade de ocorrer, em %d partidas de um total de %d.\n", media1, cont1, jogos);
 
             if ( media1 > 85){
                 printf("\n# Altissima Prababilidade #\n");
@@ -109,7 +112,7 @@ int main()
                                         }
 
 
-            printf("\nPartidas Over 2.5 tem porcentagem de %2.2f  de probabilidade de ocorrer, em %d partidas de um total de %d.\n", media2, cont2, jogos);
+            printf("\n>> Partidas Over 2.5 tem porcentagem de %2.2f  de probabilidade de ocorrer, em %d partidas de um total de %d.\n", media2, cont2, jogos);
                                             // so  o 2.5 está retornando numeros errados nos dois primeiros resulatdos do printf.
                  if ( media2 > 85){
                     printf("\n# Altissima Prababilidade #\n");
@@ -122,7 +125,7 @@ int main()
                                             }
 
 
-                printf("\nPartidas Over 3.5 tem porcentagem de %2.2f  de probabilidade de ocorrer, em %d partidas de um total de %d.\n", media3, cont3, jogos);
+                printf("\n>> Partidas Over 3.5 tem porcentagem de %2.2f  de probabilidade de ocorrer, em %d partidas de um total de %d.\n", media3, cont3, jogos);
 
                     if ( media3 > 85){
                     printf("\n# Altissima Prababilidade #\n");
@@ -140,7 +143,7 @@ int main()
                             mediagols = total / jogos;
 
                             puts("--------------------------------");
-                            printf("Media de Gols = %1.1f\n", mediagols);
+                            printf(">> Media de Gols = %1.1f\n", mediagols);
                             puts("--------------------------------");
                             puts("\n");
 
@@ -166,7 +169,7 @@ int main()
         puts("\n  Método Critério de Kelly Simples");
         puts("-------------------------------------\n");
 
-        printf("Qual o valor da odds do time da casa? use ponto (.):  ");
+        /*printf("Qual o valor da odds do time da casa? use ponto (.):  ");
         scanf("%f",&casa);
 
         favor = (1/casa);
@@ -185,7 +188,37 @@ int main()
 
            puts("\n * Não vale a operação * \n");
 
-            };
+            };*/
+
+        printf("Qual Odds do mercado para o evento:");
+        scanf("%f",&odds_atual);
+
+        printf("Valor máximo de entrada da stake (valor int):");
+        scanf("%f",&stake_max);
+
+        printf("Qual a probabilidade(%) maxima, esperada para o green:");
+        scanf("%f",&ganhos_max);
+
+        printf("Qual a probabilidade(%) maxima de stop lost para um red ou ajustes: ");
+        scanf("%f",&red_ajustes_max);
+
+        /*Transformando as porcentagens:*/
+        transf_adds_atual = odds_atual/100;
+        transf_ganhos_max = ganhos_max/100;
+        transf_red_ajustes_max = red_ajustes_max/100;
+
+        r = transf_ganhos_max/transf_red_ajustes_max;
+
+        calc_1=1-transf_adds_atual;
+        calc_2=transf_ganhos_max/transf_red_ajustes_max;
+        calc_x =calc_1/calc_2;
+        stakeideal = transf_adds_atual - calc_x;
+        valor_sugerido = stake_max*stakeideal;
+        valor_sugerido_stake = stake_max-valor_sugerido ;
+
+
+        printf("\n\nEntrada ideal R$ %.2f \n",valor_sugerido_stake);
+        printf("Ajuste da stake de R$ %.2f, equivalente a %.2f \n",valor_sugerido,stakeideal);
 
         break;
 
