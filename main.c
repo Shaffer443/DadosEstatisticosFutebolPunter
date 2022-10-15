@@ -14,6 +14,8 @@ int main()
     float casa,favor,contra,kelly,kellyporc;
     int jogos, contador, gols, over1=2, over2=3, over3=4, cont1=0, cont2=0, cont3=0;
     float odds_atual, stake_max, ganhos_max, red_ajustes_max, transf_adds_atual, transf_ganhos_max, transf_red_ajustes_max, r,calc_1, calc_2, calc_x, stakeideal, valor_sugerido,valor_sugerido_stake;
+    float prob_red_ajuste, trans_prob_green_do_evento, trans_prob_red_ajuste, trans_odds, trans_comissao_trade, prob_green_do_evento, comissao_trade, stake, valor_bruto_do_green, valor_liquido_comissao, valor_liquido_do_green , faturamento_green, faturamento_red, saldo_da_operacao;
+
 
     do{
         printf("\n");
@@ -23,7 +25,8 @@ int main()
         puts("4. Porcentagem de Acertabilidade de entradas Punter.");
         puts("5. Probabilidade de Over - Under.");
         puts("6. Criterio de Kelly.");
-        puts("7. Sair");
+        puts("7. EV+");
+        puts("8. Sair");
         printf("Digite a opcao desejada: ");
         scanf("%d", &opcao);
 
@@ -154,41 +157,9 @@ int main()
 
         case 6:
 
-        /*
-        Kelly = (BP – Q) / B
-
-        B = (Odd da Casa) – 1
-        P = Probabilidade de o resultado acontecer (de acordo com sua opinião)
-        Q = Probabilidade de o resultado não acontecer, ou seja 1 – P
-        */
-
-
-
-
-
         puts("\n  Método Critério de Kelly Simples");
         puts("-------------------------------------\n");
 
-        /*printf("Qual o valor da odds do time da casa? use ponto (.):  ");
-        scanf("%f",&casa);
-
-        favor = (1/casa);
-        contra = (1.00 - favor);
-
-        kelly = ((casa - 1) * (favor-contra))/(casa-1);
-        kellyporc = kelly*100;
-
-        printf("\n %.4f ou %.2f % \n", kelly, kellyporc);
-
-        if (kelly >= 0.05){
-
-        puts("\n* Tem +EV * \n");
-
-         } else{
-
-           puts("\n * Não vale a operação * \n");
-
-            };*/
 
         printf("Qual Odds do mercado para o evento:");
         scanf("%f",&odds_atual);
@@ -222,29 +193,54 @@ int main()
 
         break;
 
-    /*O resultado acima deu negativo, e você deve estar se perguntando se há algo de errado com o cálculo. Não, não há.
-
-      Isso ocorre porque segundo o Critério de Kelly não compensa apostar nesse resultado com essa odd de vitória para o Time casa ser negativo.
-
-      Por quê?
-
-      Porque a odds que a casa colocou na vitória do Time da Casa, significa que a casa acha que a probabilidade do time vencer não vale a opereção.
-
-      Se a casa dá uma chance de vitória Time da Casa maior do que a que a gente acha que é verdadeira, então não compensa apostar nesse resultado. Não é uma aposta de valor!
-
-      Mas vamos a um exemplo quando o critério é positivo, o Critério de Kelly nos diz que você deve apostar o valor que a % mencionar da sua banca na vitória.
-
-      Isso só é possível levando em consideração a odd da casa e a probabilidade real de o evento acontecer.
-
-      Aqui identificamos um pequeno problema do método: pode acontecer de o método sugerir apostar porcentagens muito altas da sua banca.
-
-      Cabe o discernimento do apostador em decidir se vale a pena fazer a aposta ou não. É costume no Critério de Kelly estabelecer um teto porcentual máximo.*/
-
-
-
         case 7:
+            /* Confirmar se tal valor de odds do evento, vale a entrda ou não na operação*/
 
-            printf("fechando Sistema...\n"); /* não está fechando e saindo*/
+            printf("Probabilidade(%) do evento ocorrer: ");
+            scanf("%f",&prob_green_do_evento);
+            printf("Porcentagem da comissao(%): ");
+            scanf("%f",&comissao_trade);
+            printf("Valor(R$) da stake para operação: ");
+            scanf("%f",&stake);
+            printf("Odds ofertada para o evento: ");
+            scanf("%f",&odds);
+
+            /*Transformações das porcentagens em decimal*/
+
+            trans_comissao_trade = comissao_trade/100;
+            trans_odds = odds-1; /*observar isso*/
+
+            /*Valor para operação*/
+            valor_bruto_do_green = stake * trans_odds;
+
+            valor_liquido_comissao = valor_bruto_do_green*trans_comissao_trade;
+
+            valor_liquido_do_green = valor_bruto_do_green - valor_liquido_comissao;
+
+            /*Tratamento da probabilidade*/
+            prob_red_ajuste = 100 - prob_green_do_evento;
+
+            trans_prob_green_do_evento = prob_green_do_evento/100;
+            trans_prob_red_ajuste = prob_red_ajuste/100;
+
+            /*valores finais para cada green e red*/
+            faturamento_green= valor_liquido_do_green * trans_prob_green_do_evento;
+
+            faturamento_red= -stake * trans_prob_red_ajuste;
+            saldo_da_operacao = faturamento_green+faturamento_red;
+
+            if(saldo_da_operacao>0){
+              printf("\n< EV+ > - Operação tem valor. Lucro por operação GREEN de R$ %.2f \n", saldo_da_operacao);
+
+            }else{
+              printf("\nEsta operação não tem valor. Prejuizo por peração de R$ %.2f\n", saldo_da_operacao);
+            }
+             break;
+
+        case 8:
+
+            printf("fechando Sistema...\n");
+            break;
 
         default:
             printf("\nErro. Opcao Invalida. Digite uma opcao do Menu abaixo:\n\n"); //digitando 4 está aparecendo esta messagem.
@@ -254,7 +250,7 @@ int main()
 
 
 
-    }while(opcao!=7);
+    }while(opcao!=8);
 
     return 0;
 }
