@@ -5,7 +5,7 @@ import math
 import funcoes
 
 # link dos dados que deseja analisar.
-link_time_casa = 'https://www.fctables.com/teams/fiorentina-185391/'
+link_time_casa = 'https://www.fctables.com/teams/tottenham-195775/'
 
 headers={'User-Agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36 OPR/89.0.4447.83"}
 
@@ -74,9 +74,9 @@ def timeCasa():
     print(f"- EMPATES TOTAIS do {nome_time} na temporada: {empates_totais}")
     print(f"- DERROTAS TOTAIS do {nome_time} na temporada: {loser_totais}")
     print(f"- Probabilidades de OVER 1,5 FT TOTAIS do {nome_time} na temporada: {over15_totais}")
-    print(f"{funcoes.over15CasaTotal(over15_totais)}")
+    print(f"{funcoes.over15Total(over15_totais)}")
     print(f"- Probabilidades de OVER 2,5 FT TOTAIS do {nome_time} na temporada: {over25_totais}")
-    print(f"{funcoes.over15CasaTotal(over25_totais)}")
+    print(f"{funcoes.over15Total(over25_totais)}")
 
     ### teste de tabulação ###
 
@@ -92,6 +92,8 @@ def timeCasa():
     win_ultimos6jogos = outros_dados_totais[2].get_text()
     empates_ultimos6jogos = soup.find_all('div', "text-warning")[0].get_text()
     loser_ultimos6jogos = soup.find_all('div', "text-danger")[0].get_text()
+    over15_ultimos6jogos = outros_dados_totais[4].get_text()
+    over25_ultimos6jogos = outros_dados_totais[3].get_text()
 
 
     #print("-"*100)
@@ -104,6 +106,8 @@ def timeCasa():
     print(f"ViTÓRIAS do {nome_time}  nos ultimos 6 jogos: {win_ultimos6jogos}")
     print(f"EMPATES do {nome_time}  nos ultimos 6 jogos: {empates_ultimos6jogos}")
     print(f"DERROTAS do {nome_time}  nos ultimos 6 jogos: {loser_ultimos6jogos}")
+    print(f"OVER 1,5 do {nome_time}  nos ultimos 6 jogos: {over15_ultimos6jogos}")
+    print(f"OVER 2,5 do {nome_time}  nos ultimos 6 jogos: {over25_ultimos6jogos}")
 
     # dados do momento e validades:
 
@@ -115,6 +119,11 @@ def timeCasa():
     estatisticas = soup.find_all("td", "text-center")
 
     #print(estatisticas)
+
+    print(outros_dados_totais)
+
+    #print(funcoes.over25CasaTotal_6ultimos(over25_ultimos6jogos))
+    print(funcoes.over15Total_6ultimos(over15_ultimos6jogos))
 
 
 

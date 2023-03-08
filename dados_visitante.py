@@ -74,9 +74,9 @@ def timeVisitante():
     print(f"- EMPATES TOTAIS do {nome_time} na temporada: {empates_totais}")
     print(f"- DERROTAS TOTAIS do {nome_time} na temporada: {loser_totais}")
     print(f"- Probabilidades de OVER 1,5 FT TOTAIS do {nome_time} na temporada: {over15_totais}")
-    print(f"{funcoes.over15CasaTotal(over15_totais)}")
+    print(f"{funcoes.over15Total(over15_totais)}")
     print(f"- Probabilidades de OVER 2,5 FT TOTAIS do {nome_time} na temporada: {over25_totais}")
-    print(f"{funcoes.over15CasaTotal(over25_totais)}")
+    print(f"{funcoes.over15Total(over25_totais)}")
 
     #dados do momento e validades:
 
@@ -89,6 +89,8 @@ def timeVisitante():
     win_ultimos6jogos = outros_dados_totais[2].get_text()
     empates_ultimos6jogos = soup.find_all('div', "text-warning")[0].get_text()
     loser_ultimos6jogos = soup.find_all('div', "text-danger")[0].get_text()
+    over15_ultimos6jogos = outros_dados_totais[4].get_text()
+    over25_ultimos6jogos = outros_dados_totais[3].get_text()
 
     #print("-"*100)
     print('\n')
@@ -100,11 +102,13 @@ def timeVisitante():
     print(f"ViTÓRIAS do {nome_time}  nos ultimos 6 jogos: {win_ultimos6jogos}")
     print(f"EMPATES do {nome_time}  nos ultimos 6 jogos: {empates_ultimos6jogos}")
     print(f"DERROTAS do {nome_time}  nos ultimos 6 jogos: {loser_ultimos6jogos}")
+    print(f"OVER 1,5 do {nome_time}  nos ultimos 6 jogos: {over15_ultimos6jogos}")
+    print(f"OVER 2,5 do {nome_time}  nos ultimos 6 jogos: {over25_ultimos6jogos}")
+
+    print(outros_dados_totais)
 
 
-
-
-
+timeVisitante()
 
 
 
