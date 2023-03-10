@@ -68,3 +68,131 @@ def over25Total_6ultimos(over25_6ultimos):
         resposta = f"{odds_validas:.2f}"
         #print(f"     Odds Válidas acima de {odds_validas:.2f}")
         return porcentagem, resposta
+
+
+############################### outras funções ##########################################
+
+def evPositivo(jogos, wins, valorEntrada, oddsAtual):
+        comissao=float(0.065) #6,5%
+
+        probabilidade = wins/jogos
+        #transf_probabilidade = probabilidade[:-1]
+        #n_probabilidade = float(transf_probabilidade)
+        #porcentagem_probabilidade = n_probabilidade/100
+
+        n_valorEntrada = float(valorEntrada)
+
+        n_oddsAtual = float(oddsAtual)
+        porcentagem_odds = (1/n_oddsAtual)*100 #sem uso essa transformação
+
+        calculo01 = ((n_oddsAtual-1)*n_valorEntrada)-n_valorEntrada
+        green01 = n_valorEntrada+calculo01
+        valorComissao = green01*comissao
+        saldo01 = green01-valorComissao
+
+        greenfinal = probabilidade*saldo01
+
+        # red:
+
+        red_max = -n_valorEntrada
+        porcentagem_red = 1.00-probabilidade
+        redfinal =  porcentagem_red*red_max
+
+        saldoOperacao = greenfinal+redfinal # subtração pq o red já vem negativo
+
+        if(saldoOperacao <= 0):
+                print('Operação com prejuizo com esta odds: # NÃO OPERAR - Prejuízo a longo prazo. # !')
+                return print('Prejuizo')
+        else:
+                print(f"Operação com Lucatividade de R${saldoOperacao:.2f} \n- Lucro a longo prazo com esta odds de {n_oddsAtual} com a probabilidade de {porcentagem_odds:.2f}% !")
+                return saldoOperacao,n_oddsAtual, porcentagem_odds
+        #print(saldoOperacao)
+        #print(redfinal)
+        #print(red_max)
+        #print(porcentagem_red)
+        #print(greenfinal)
+        #print(calculo01,valorComissao, saldo01)
+
+#evPositivo(16,7,'100.00','2.10')
+
+def evPositivoPunter(jogos, wins, valorEntrada, oddsAtual):
+        comissao=float(0.065) #6,5%
+        int_jogos = int(jogos)
+        int_wins = int(wins)
+
+        probabilidade = int_wins/int_jogos
+        #transf_probabilidade = probabilidade[:-1]
+        #n_probabilidade = float(transf_probabilidade)
+        #porcentagem_probabilidade = n_probabilidade/100
+
+        n_valorEntrada = float(valorEntrada)
+
+        n_oddsAtual = float(oddsAtual)
+        porcentagem_odds = (1/n_oddsAtual)*100 #sem uso essa transformação
+
+        calculo01 = ((n_oddsAtual-1)*n_valorEntrada)-n_valorEntrada
+        green01 = n_valorEntrada+calculo01
+        valorComissao = green01*comissao
+        saldo01 = green01-valorComissao
+
+        greenfinal = probabilidade*saldo01
+
+        # red:
+
+        red_max = -n_valorEntrada
+        porcentagem_red = 1.00-probabilidade
+        redfinal =  porcentagem_red*red_max
+
+        saldoOperacao = greenfinal+redfinal # subtração pq o red já vem negativo
+
+        calculo_probabilidade = probabilidade - porcentagem_red
+
+        if(calculo_probabilidade < 0): #avaliar os divisores em testes
+                if(calculo_probabilidade > -0.07):
+                        porcentagem_premissa = (calculo_probabilidade/1.2)*-1 #deixando positivo
+                        valor_Premissa_odds_porcentagem = float(oddsAtual)*porcentagem_premissa
+                        oddsPremissa = float(oddsAtual)+valor_Premissa_odds_porcentagem
+                        resultado = f"{oddsPremissa:.2f}"
+                        # print(oddsPremissa)
+                        return resultado
+                elif (calculo_probabilidade < -0.07 and calculo_probabilidade >= -0.15 ):
+                        porcentagem_premissa = (calculo_probabilidade / 4.8) * -1  # deixando positivo 1.2*4=4.8
+                        valor_Premissa_odds_porcentagem = float(oddsAtual) * porcentagem_premissa
+                        oddsPremissa = float(oddsAtual) + valor_Premissa_odds_porcentagem
+                        resultado = f"{oddsPremissa:.2f}"
+                        # print(oddsPremissa)
+                        return resultado
+                elif (calculo_probabilidade < -0.15 ):
+                        porcentagem_premissa = (calculo_probabilidade / 7.2) * -1  # deixando positivo 1.2*6=9.7.2
+                        valor_Premissa_odds_porcentagem = float(oddsAtual) * porcentagem_premissa
+                        oddsPremissa = float(oddsAtual) + valor_Premissa_odds_porcentagem
+                        resultado = f"{oddsPremissa:.2f}"
+                        # print(oddsPremissa)
+                        return resultado
+        else:
+                if(calculo_probabilidade <= 0.15):
+                        porcentagem_premissa = (calculo_probabilidade / 3) #verificar as divisões
+                        valor_Premissa_odds_porcentagem = float(oddsAtual) * porcentagem_premissa
+                        oddsPremissa = float(oddsAtual) + valor_Premissa_odds_porcentagem
+                        resultado = f"{oddsPremissa:.2f}"
+                        # print(oddsPremissa)
+                        return resultado
+                elif(calculo_probabilidade > 0.15 and calculo_probabilidade <= 0.30 ):
+                        porcentagem_premissa = (calculo_probabilidade / 6)  # verificar as divisões
+                        valor_Premissa_odds_porcentagem = float(oddsAtual) * porcentagem_premissa
+                        oddsPremissa = float(oddsAtual) + valor_Premissa_odds_porcentagem
+                        resultado = f"{oddsPremissa:.2f}"
+                        # print(oddsPremissa)
+                        return resultado
+                elif (calculo_probabilidade > 0.30 and calculo_probabilidade <= 0.60):
+                        porcentagem_premissa = (calculo_probabilidade / 9)  # verificar as divisões
+                        valor_Premissa_odds_porcentagem = float(oddsAtual) * porcentagem_premissa
+                        oddsPremissa = float(oddsAtual) + valor_Premissa_odds_porcentagem
+                        resultado=f"{oddsPremissa:.2f}"
+                        #print(oddsPremissa)
+                        return resultado
+        #print(probabilidade)
+        #print(porcentagem_red)
+
+#x=evPositivoPunter(44,31,'100.00','1.42')
+#print(x)

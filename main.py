@@ -52,6 +52,10 @@ loser_totais = soup.find_all('div', "text-danger")[1].get_text()
 over15_totais = soup.find_all('div', "text-success")[11].get_text()
 over25_totais = soup.find_all('div', "text-success")[10].get_text()
 
+#funções
+
+odds_wins_geral = funcoes.oddWinCasaTotal(jogos_totais,win_totais)
+ev_positivo_punter = funcoes.evPositivoPunter(jogos_totais,win_totais,'1.00', odds_wins_geral) #imputar o valor mais na frente
 
 #### ultimos 6 jogos #####
 
@@ -62,6 +66,7 @@ empates_ultimos6jogos = soup.find_all('div', "text-warning")[0].get_text()
 loser_ultimos6jogos = soup.find_all('div', "text-danger")[0].get_text()
 over15_ultimos6jogos = outros_dados_totais[4].get_text()
 over25_ultimos6jogos = outros_dados_totais[3].get_text()
+
 
 
 # dados do momento e validades:
@@ -132,7 +137,10 @@ over15_totais_visitante = soup.find_all('div', "text-success")[11].get_text()
 over25_totais_visitante = soup.find_all('div', "text-success")[10].get_text()
 
 
-# dados do momento e validades:
+#funções
+
+odds_wins_geral_visitante = funcoes.oddWinCasaTotal(jogos_totais_visitante,win_totais_visitante)
+ev_positivo_punter_visitante = funcoes.evPositivoPunter(jogos_totais_visitante,win_totais_visitante,'1.00', odds_wins_geral_visitante) #imputar o valor mais na frente
 
 
 #### ultimos 6 jogos #####
@@ -152,20 +160,20 @@ print(f"Informações e estatísticas do {nome_time_casa} x {nome_time_visitante
 print("_" * 60)
 print('\n')
 
-tabela = [['Mercado',nome_time_casa, 'Odds Válidas','X',nome_time_visitante, 'Odds Válidas'],
-         ['Jogos Totais', jogos_totais,'','',jogos_totais_visitante],
-         ['Gols Totais', gols_totais,'','',gols_totais_visitante],
-          ['Gols por Partidas', media_totais,'', funcoes.medias(media_totais,media_totais_visitante) , media_totais_visitante],
-          ['VITÓRIAS', win_totais, funcoes.oddWinCasaTotal(jogos_totais,win_totais),funcoes.medias(funcoes.oddWinCasaTotal(jogos_totais,win_totais),funcoes.oddWinCasaTotal(jogos_totais_visitante,win_totais_visitante)),win_totais_visitante,funcoes.oddWinCasaTotal(jogos_totais_visitante,win_totais_visitante)],
-          ['Empates', empates_totais,'','', empates_totais_visitante],
-          ['Derrotas', loser_totais,'','',loser_totais_visitante],
-          ['Over 1,5', over15_totais, funcoes.over15Total(over15_totais),funcoes.medias(funcoes.over15Total(over15_totais),funcoes.over15Total(over15_totais_visitante)),over15_totais_visitante,funcoes.over15Total(over15_totais_visitante)],
-           ['Over 2,5', over25_totais, funcoes.over25Total(over25_totais),funcoes.medias(funcoes.over25Total(over25_totais),funcoes.over25Total(over25_totais_visitante)),over25_totais_visitante ,funcoes.over25Total(over25_totais_visitante)]]
+tabela = [['Mercado',nome_time_casa, 'Odds Mínimas','+EV','X',nome_time_visitante, 'Odds Mínimas','+EV'],
+         ['Jogos Totais', jogos_totais,'','','',jogos_totais_visitante,''],
+         ['Gols Totais', gols_totais,'','','',gols_totais_visitante,''],
+          ['Gols por Partidas', media_totais,'','', funcoes.medias(media_totais,media_totais_visitante) , media_totais_visitante,''],
+          ['VITÓRIAS', win_totais, funcoes.oddWinCasaTotal(jogos_totais,win_totais),ev_positivo_punter,funcoes.medias(funcoes.oddWinCasaTotal(jogos_totais,win_totais),funcoes.oddWinCasaTotal(jogos_totais_visitante,win_totais_visitante)),win_totais_visitante,funcoes.oddWinCasaTotal(jogos_totais_visitante,win_totais_visitante),ev_positivo_punter_visitante],
+          ['Empates', empates_totais,'','','', empates_totais_visitante,''],
+          ['Derrotas', loser_totais,'','','',loser_totais_visitante,''],
+          ['Over 1,5', over15_totais, funcoes.over15Total(over15_totais),'',funcoes.medias(funcoes.over15Total(over15_totais),funcoes.over15Total(over15_totais_visitante)),over15_totais_visitante,funcoes.over15Total(over15_totais_visitante),''],
+           ['Over 2,5', over25_totais, funcoes.over25Total(over25_totais),'',funcoes.medias(funcoes.over25Total(over25_totais),funcoes.over25Total(over25_totais_visitante)),over25_totais_visitante ,funcoes.over25Total(over25_totais_visitante),'']]
 
 print(tabulate(tabela, headers='firstrow', tablefmt='fancy_grid'))
-tabela_6jogos =[['Mercado no útimos 6 jogos',nome_time_casa,'Odds Válida','X' ,nome_time_visitante, 'Odds Válida'],
+tabela_6jogos =[['Mercado no útimos 6 jogos',nome_time_casa,'Odds Válida','X',nome_time_visitante, 'Odds Válida'],
                 #['Jogos Totais', jogos_totais,'',jogos_totais_visitante],
-                ['Gols ', gols_ultimos6jogos,'',funcoes.medias(gols_ultimos6jogos,gols_ultimos6jogos_visitante),gols_ultimos6jogos_visitante],
+                ['Gols ', gols_ultimos6jogos,'','',gols_ultimos6jogos_visitante],
                 ['Gols por Partidas', media_ultimos6jogos,'', funcoes.medias(media_ultimos6jogos,media_ultimos6jogos_visitante) ,media_ultimos6jogos_visitante],
                 ['VITÓRIAS', win_ultimos6jogos, funcoes.oddWinCasaTotal('6',win_ultimos6jogos),funcoes.medias(funcoes.oddWinCasaTotal('6',win_ultimos6jogos),funcoes.oddWinCasaTotal('6',win_ultimos6jogos_visitante)),win_ultimos6jogos_visitante,funcoes.oddWinCasaTotal('6',win_ultimos6jogos_visitante)],
                 ['Empates', empates_ultimos6jogos,'','', empates_ultimos6jogos_visitante],
