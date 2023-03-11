@@ -115,6 +115,23 @@ def evPositivo(jogos, wins, valorEntrada, oddsAtual):
 
 #evPositivo(16,7,'100.00','2.10')
 
+def previssoesGols(mediaGolsCasa,mediasGolsVisitante):
+        number_mediaGolsCasa = float(mediaGolsCasa)
+        number_mediaGolsVisitante = float(mediasGolsVisitante)
+
+        mediaGeral = (number_mediaGolsCasa/number_mediaGolsVisitante)/2
+
+        if (mediaGeral < 1.5):
+                return "Over 1.5"
+        if(mediaGeral >= 1.5 and mediaGeral <= 2.5):
+                return "Over 1.5"
+        elif (mediaGeral > 2.5 and mediaGeral <= 3.5):
+                return "Over 2.5"
+        else:
+                return "Over 3.5"
+
+
+
 def evPositivoPunter(jogos, wins, valorEntrada, oddsAtual):
         comissao=float(0.065) #6,5%
         int_jogos = int(jogos)

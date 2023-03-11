@@ -5,7 +5,7 @@ import math
 import funcoes
 
 # link dos dados que deseja analisar.
-link_time_casa = 'https://www.fctables.com/teams/tottenham-195775/'
+link_time_casa = 'https://www.fctables.com/teams/real-madrid-192583/'
 
 headers={'User-Agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36 OPR/89.0.4447.83"}
 
@@ -114,16 +114,22 @@ def timeCasa():
     #< label class ="label label-primary" > 46.21 % < / label >
     #<label class="label label-primary">12.04</label>
     #< label class ="label label-primary" > 12.04 < / label >
+    #< label class ="label label-primary" > 17.43 < / label >
+    #"table", "table-striped"
     # div class=col-sm-6
     #"div", "team_stats_box"
-    estatisticas = soup.find_all("td", "text-center")
+    #"td", "text-center"
 
-    #print(estatisticas)
+    estatisticas = soup.find_all("div", "card-box") #estatistica[1]
+    #estatisticas_1 = soup.find_all("canvas", "possesion")
+    #estatisticas_2 = soup.find_all("div", "team_stats_box")
 
-    print(outros_dados_totais)
+    #print(estatisticas_2)
+
+    #print(outros_dados_totais)
 
     #print(funcoes.over25CasaTotal_6ultimos(over25_ultimos6jogos))
-    print(funcoes.over15Total_6ultimos(over15_ultimos6jogos))
+    #print(funcoes.over15Total_6ultimos(over15_ultimos6jogos))
 
 
 
