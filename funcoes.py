@@ -121,11 +121,11 @@ def previssoesGols(mediaGolsCasa,mediasGolsVisitante):
 
         mediaGeral = (number_mediaGolsCasa/number_mediaGolsVisitante)/2
 
-        if (mediaGeral < 1.5):
+        if (mediaGeral > 1.5):
+                return "Under"
+        if(mediaGeral <= 1.5 and mediaGeral <= 2.0):
                 return "Over 1.5"
-        if(mediaGeral >= 1.5 and mediaGeral <= 2.5):
-                return "Over 1.5"
-        elif (mediaGeral > 2.5 and mediaGeral <= 3.5):
+        elif (mediaGeral < 2.0 and mediaGeral <= 3.0):
                 return "Over 2.5"
         else:
                 return "Over 3.5"
