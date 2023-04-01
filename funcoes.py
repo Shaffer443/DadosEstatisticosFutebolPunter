@@ -1,3 +1,5 @@
+####### Funções pré #######
+
 
 
 ##### Calculos do time da CASA ####
@@ -213,3 +215,7 @@ def evPositivoPunter(jogos, wins, valorEntrada, oddsAtual):
 
 #x=evPositivoPunter(44,31,'100.00','1.42')
 #print(x)
+
+
+######## Funções Live ########
+

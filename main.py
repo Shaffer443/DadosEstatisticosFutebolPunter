@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from tabulate import tabulate
 import funcoes
+#import dados_live
 
 # links dos dados que deseja analisar(Site de referência para os dados: https://www.fctables.com)
 casa = input('Insira o link dos dados sobre o time da CASA do site www.fctables.com: ')
@@ -183,8 +184,8 @@ tabela_6jogos =[['Mercado no útimos 6 jogos',nome_time_casa,'Odds Mínimas','X'
 
 print(tabulate(tabela_6jogos, headers='firstrow', tablefmt='fancy_grid'))
 
-tabela_live = [['Tempo de jogo']
-                 ['contagem do tempo']],
+#tabela_live = [['Tempo de jogo']
+#                 ['contagem do tempo']],
 
 
-print(tabulate(tabela_live, headers='firstrow', tablefmt='fancy_grid'))
+#print(tabulate(tabela_live, headers='firstrow', tablefmt='fancy_grid'))

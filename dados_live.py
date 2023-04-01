@@ -3,10 +3,12 @@ from bs4 import BeautifulSoup
 import math
 import funcoes
 
+
 # site : sofa score
 
 # link's dos dados qeu deseja analisar.
-link_live = 'https://www.fctables.com/livescore/chaves-fc-porto-g2101810/'
+insert_link = input('Insira o link dos dados sobre o time da CASA do site  www.fctables.com:: ')
+link_live = f"{insert_link}"
 headers={'User-Agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36 OPR/89.0.4447.83"}
 # passando o que queremos do site:
 site = requests.get(link_live, headers=headers)
@@ -48,3 +50,6 @@ print(f"Chutes no GOL do time da casa: {chute_nogol_time_casa}")
 print(f"\nGol's do time da Visitante: {gol_time_visitante}")
 print(f"Chutes do time da Visitante: {chute_time_visitante}")
 print(f"Chutes no GOL do time da Visitante: {chute_nogol_time_visitante}")
+
+
+
