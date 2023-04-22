@@ -154,7 +154,27 @@ loser_ultimos6jogos_visitante = soup.find_all('div', "text-danger")[0].get_text(
 over15_ultimos6jogos_visitante = outros_dados_totais_visitante[4].get_text()
 over25_ultimos6jogos_visitante = outros_dados_totais_visitante[3].get_text()
 
-##################################################################################################################
+########################################################################################################################
+print('\n')
+print(f"Premissas {nome_time_casa} x {nome_time_visitante}")
+print('\n')
+
+previsao = funcoes.tendenciaOverGeral(media_totais, media_totais_visitante, over15_totais, over15_totais_visitante) + funcoes.tendenciaOverUltimosJogos(media_ultimos6jogos,media_ultimos6jogos_visitante, funcoes.over15Total_6ultimos(over15_ultimos6jogos)[0], funcoes.over15Total_6ultimos(over15_ultimos6jogos_visitante)[1])
+if previsao == 8:
+    indicador = "Probabilidade ALTA de gols na partida"
+
+elif previsao < 8 and previsao >= 6:
+    indicador = "Probabilidade MODERADA de gols na partida"
+
+else:
+    indicador = "Probabilidade POUCOS de gols na partida"
+
+tabelaIndicador = [['Indicadores', 'Provisões'],
+                   ['Indicadores de Gols', indicador]]
+
+print(tabulate(tabelaIndicador,  headers='firstrow', tablefmt="simple"))
+
+
 
 print('\n')
 print(f"Informações e estatísticas do {nome_time_casa} x {nome_time_visitante}")
@@ -172,6 +192,7 @@ tabela = [['Mercado',nome_time_casa, 'Odds Mínimas','+EV','X',nome_time_visitan
            ['Over 2,5', over25_totais, funcoes.over25Total(over25_totais),'',funcoes.medias(funcoes.over25Total(over25_totais),funcoes.over25Total(over25_totais_visitante)),over25_totais_visitante ,funcoes.over25Total(over25_totais_visitante),'']]
 
 print(tabulate(tabela, headers='firstrow', tablefmt='fancy_grid'))
+
 tabela_6jogos =[['Mercado no útimos 6 jogos',nome_time_casa,'Odds Mínimas','X',nome_time_visitante,'Odds Mínimas'],
                 #['Jogos Totais', jogos_totais,'',jogos_totais_visitante],
                 ['Gols ', gols_ultimos6jogos,'','',gols_ultimos6jogos_visitante],

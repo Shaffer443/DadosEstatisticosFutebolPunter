@@ -4,6 +4,18 @@
 
 - requests (pip install requests)
 - beautifulsoup4 (pip install beautifulsoup4) 
+- tabulate (pip install tabulate) (from tabulate import tabulate)
+  documentação: https://pypi.org/project/tabulate/
+- pyinstaller (pip install pyinstaller) - Criação de arquivos .exe
+
+**pyinstaller**
+Exemplo de criação: pyinstaller --onefile -w <nome do arquivo>
+
+parâmetro "-w", caso precise de interação do usuário na aplicaçao. Caso não precise, pode-se usar sem:
+Exemplo:
+  pyinstaller --onefile <nome do arquivo>
+
+
 
 - Site de referência para os dados: https://www.fctables.com
 

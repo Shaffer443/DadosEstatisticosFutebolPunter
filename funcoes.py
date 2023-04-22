@@ -217,5 +217,88 @@ def evPositivoPunter(jogos, wins, valorEntrada, oddsAtual):
 #print(x)
 
 
-######## Funções Live ########
+######## Funções premissas ########
+
+def tendenciaOverGeral(casa,visitante, probCasa, probVisitante ):
+
+        number_casa = float(casa)
+        number_visitante = float(visitante)
+        texto_casa = probCasa[:-1]
+        texto_visitante = probVisitante[:-1]
+        porcentagem_casa = float(texto_casa)
+        porcentagem_visitante = float(texto_visitante)
+
+        somaGolsCasa = 0
+        somaGolsVisitante = 0
+        somaProbCasa = 0
+        somaProbVisitante = 0
+
+        if number_casa >= 1.5 and number_visitante < 2.5:
+                somaGolsCasa = 1
+        elif number_casa >= 2.5:
+                somaGolsCasa = 2
+        else:
+                somaGolsCasa = 0
+
+        if number_visitante >= 1.5 and number_visitante < 2.5:
+                somaGolsVisitante = 1
+        elif number_visitante >= 2.5:
+                somaGolsVisitante = 2
+        else:
+                somaGolsVisitante = 0
+
+        if porcentagem_casa >= 85:
+                somaProbCasa = 2
+        elif porcentagem_casa >= 75 and porcentagem_casa < 85:
+                somaProbCasa = 1
+
+        if porcentagem_visitante >= 85:
+                somaProbVisitante = 2
+        elif porcentagem_visitante >= 75 and porcentagem_visitante < 85:
+                somaProbVisitante = 1
+
+        somaGeral = somaGolsCasa + somaProbCasa + somaGolsVisitante + somaProbVisitante
+
+        return somaGeral
+
+def tendenciaOverUltimosJogos(casa,visitante, probCasa, probVisitante ):
+        number_casa = float(casa)
+        number_visitante = float(visitante)
+        texto_casa = probCasa[:-1]
+        texto_visitante = probVisitante[:-1]
+        porcentagem_casa = float(texto_casa)
+        porcentagem_visitante = float(texto_visitante)
+
+        somaGolsCasa = 0
+        somaGolsVisitante = 0
+        somaProbCasa = 0
+        somaProbVisitante = 0
+
+        if number_casa >= 1.5 and number_visitante < 2.5:
+                somaGolsCasa = 1
+        elif number_casa >= 2.5:
+                somaGolsCasa = 2
+        else:
+                somaGolsCasa = 0
+
+        if number_visitante >= 1.5 and number_visitante < 2.5:
+                somaGolsVisitante = 1
+        elif number_visitante >= 2.5:
+                somaGolsVisitante = 2
+        else:
+                somaGolsVisitante = 0
+
+        if porcentagem_casa >= 85:
+                somaProbCasa = 2
+        elif porcentagem_casa >= 75 and porcentagem_casa < 85:
+                somaProbCasa = 1
+
+        if porcentagem_visitante >= 85:
+                somaProbVisitante = 2
+        elif porcentagem_visitante >= 75 and porcentagem_visitante < 85:
+                somaProbVisitante = 1
+
+        somaGeral = somaGolsCasa + somaProbCasa + somaGolsVisitante + somaProbVisitante
+
+        return somaGeral
 

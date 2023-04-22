@@ -8,9 +8,11 @@ from datetime import datetime
 #link_time_casa = 'https://footystats.org/england/manchester-united-fc-vs-fulham-fc-h2h-stats'
 
 insert_link = input('Insira o link dos dados da live site www.footystats.org: ')
-link_live = f"{insert_link}"
 
 while True:
+
+    link_live = f"{insert_link}"
+
 
     headers={'User-Agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36 OPR/89.0.4447.83"}
 
