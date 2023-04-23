@@ -159,15 +159,25 @@ print('\n')
 print(f"Premissas {nome_time_casa} x {nome_time_visitante}")
 print('\n')
 
-previsao = funcoes.tendenciaOverGeral(media_totais, media_totais_visitante, over15_totais, over15_totais_visitante) + funcoes.tendenciaOverUltimosJogos(media_ultimos6jogos,media_ultimos6jogos_visitante, funcoes.over15Total_6ultimos(over15_ultimos6jogos)[0], funcoes.over15Total_6ultimos(over15_ultimos6jogos_visitante)[1])
-if previsao == 8:
-    indicador = "Probabilidade ALTA de gols na partida"
+premissa_casa = funcoes.tendenciaOverGeral(media_totais, media_totais_visitante,funcoes.previssoesGols(media_totais,media_totais_visitante) , over15_totais, over15_totais_visitante)
+premissa_visitante = funcoes.tendenciaOverUltimosJogos(media_ultimos6jogos,media_ultimos6jogos_visitante, funcoes.previssoesGols(media_ultimos6jogos, media_ultimos6jogos_visitante), funcoes.over15Total_6ultimos(over15_ultimos6jogos)[0], funcoes.over15Total_6ultimos(over15_ultimos6jogos_visitante)[0])
 
-elif previsao < 8 and previsao >= 6:
-    indicador = "Probabilidade MODERADA de gols na partida"
+previsao = premissa_casa + premissa_visitante
+
+#print(funcoes.tendenciaOverGeral(media_totais, media_totais_visitante,funcoes.previssoesGols(media_totais,media_totais_visitante) , over15_totais, over15_totais_visitante))
+#print(funcoes.tendenciaOverUltimosJogos(media_ultimos6jogos,media_ultimos6jogos_visitante, funcoes.previssoesGols(media_ultimos6jogos, media_ultimos6jogos_visitante), funcoes.over15Total_6ultimos(over15_ultimos6jogos)[0], funcoes.over15Total_6ultimos(over15_ultimos6jogos_visitante)[0]))
+
+if previsao >= 7:
+    indicador = "Premissa de muitos gols na partida"
+
+elif previsao < 7 and previsao >= 5:
+    indicador = "Premissa de pegar até 2 gols"
+
+elif previsao < 5 and previsao >= 3:
+    indicador = "Premissa de pegar até 1 gol"
 
 else:
-    indicador = "Probabilidade POUCOS de gols na partida"
+    indicador = "Tendência UNDER"
 
 tabelaIndicador = [['Indicadores', 'Provisões'],
                    ['Indicadores de Gols', indicador]]

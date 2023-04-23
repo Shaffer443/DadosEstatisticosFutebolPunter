@@ -7,13 +7,18 @@
 - tabulate (pip install tabulate) (from tabulate import tabulate)
   documentação: https://pypi.org/project/tabulate/
 - pyinstaller (pip install pyinstaller) - Criação de arquivos .exe
+- auto-py-to-exe (pip install auto-py-to-exe) - Criação de arquivos .exe
 
-**pyinstaller**
+
+**pyinstaller**</br></br>
 Exemplo de criação: pyinstaller --onefile -w <nome do arquivo>
 
 parâmetro "-w", caso precise de interação do usuário na aplicaçao. Caso não precise, pode-se usar sem:
 Exemplo:
   pyinstaller --onefile <nome do arquivo>
+
+**auto-py-to-exe**</br></br>
+Após instalar a biblioteca, chamar o arquivo de converção no terminal usando: <b>auto-py-to-exe</b>
 
 
 
